@@ -1,11 +1,20 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import api from './services/api';
 import "./styles.css";
 
 function App() {
-  async function handleAddRepository() {
-    // TODO
-  }
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    api.get('/projects').then(response => {
+      setProjects(response.data)
+    })
+  }, []);
+  
+  function handleAddRepository() {
+    setProjects([...projects, 'três']);
+    console.log(projects); 
+  };
 
   async function handleRemoveRepository(id) {
     // TODO
